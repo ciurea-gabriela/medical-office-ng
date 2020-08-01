@@ -11,7 +11,7 @@ import {SnackBarUtil} from '../../../util/SnackBarUtil';
   styleUrls: ['./medical-procedure-screen.component.scss']
 })
 export class MedicalProcedureScreenComponent implements OnInit {
-  @ViewChild(MedicalProcedureCardListComponent, {static: false}) medicalProcedureCardListComponent: MedicalProcedureCardListComponent;
+  @ViewChild(MedicalProcedureCardListComponent) medicalProcedureCardListComponent: MedicalProcedureCardListComponent;
 
   constructor(private dialog: MatDialog,
               private snackBar: SnackBarUtil) {

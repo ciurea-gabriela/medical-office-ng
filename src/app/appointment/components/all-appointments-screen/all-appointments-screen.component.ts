@@ -11,7 +11,7 @@ import {AppointmentViewType} from '../../../model/enums/appointment-view-type.en
   styleUrls: ['./all-appointments-screen.component.scss']
 })
 export class AllAppointmentsScreenComponent implements OnInit {
-  @ViewChild(AppointmentListComponent, {static: false}) appointmentListComponent: AppointmentListComponent;
+  @ViewChild(AppointmentListComponent) appointmentListComponent: AppointmentListComponent;
   appointmentViewTypeALL = AppointmentViewType.ALL;
 
   constructor(private dialog: MatDialog) {

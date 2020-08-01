@@ -19,7 +19,7 @@ export class AppointmentScreenComponent implements OnInit {
   isDataLoaded = false;
   appointmentViewTypePatient = AppointmentViewType.PATIENT;
 
-  @ViewChild(AppointmentListComponent, {static: false}) appointmentListComponent: AppointmentListComponent;
+  @ViewChild(AppointmentListComponent) appointmentListComponent: AppointmentListComponent;
 
   constructor(
     private dialog: MatDialog,

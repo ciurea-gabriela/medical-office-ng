@@ -11,7 +11,7 @@ import {CreateEditDoctorDialogComponent} from '../create-edit-doctor-dialog/crea
 })
 export class DoctorScreenComponent implements OnInit {
 
-  @ViewChild(DoctorListComponent, {static: false}) doctorListComponent: DoctorListComponent;
+  @ViewChild(DoctorListComponent) doctorListComponent: DoctorListComponent;
 
   constructor(private dialog: MatDialog) {
   }
