@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppointmentService} from '../../../core/services/appointment.service';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {MedicalProcedureService} from '../../../core/services/medical-procedure.service';
@@ -18,15 +18,15 @@ import {MedicalProcedure} from '../../../model/medical-procedure.interface';
   styleUrls: ['./create-edit-appointment-dialog.component.scss']
 })
 export class CreateEditAppointmentDialogComponent implements OnInit {
-  private appointmentForm: FormGroup;
+  public appointmentForm: FormGroup;
   private submitted = false;
   private patientId: string;
-  private title: string;
+  public title: string;
   readonly dialogType: DialogEvent;
   private selectedAppointment: Appointment;
-  private medicalProcedures: Array<MedicalProcedure> = [];
-  private doctors: Array<Doctor> = [];
-  private patients: Array<Patient> = [];
+  public medicalProcedures: Array<MedicalProcedure> = [];
+  public doctors: Array<Doctor> = [];
+  public patients: Array<Patient> = [];
   private emptyAppointment: Appointment = {
     status: null,
     startTime: null,
@@ -52,7 +52,7 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
     this.selectedAppointment = data.appointment || this.emptyAppointment;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.appointmentForm = this.formBuilder.group({
       status: [this.selectedAppointment.status, Validators.required],
       startTime: [this.selectedAppointment.startTime, Validators.required],
@@ -76,24 +76,24 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
     this.onChanges();
   }
 
-  enableDoctor() {
+  private enableDoctor(): void {
     this.appointmentForm.get('doctorId').enable();
     this.getDoctors();
   }
 
-  onChanges(): void {
-    this.appointmentForm.get('medicalProcedureId').valueChanges.subscribe(val => {
+  private onChanges(): void {
+    this.appointmentForm.get('medicalProcedureId').valueChanges.subscribe(() => {
       this.enableDoctor();
     });
   }
 
-  getPatients() {
+  private getPatients(): void {
     this.patientService.getPatientList().subscribe(patients => {
       this.patients = patients;
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.appointmentForm.invalid) {
       return;
@@ -109,54 +109,54 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
     }
   }
 
-  createAppointmentForSpecificPatient() {
+  private createAppointmentForSpecificPatient(): void {
     this.appointmentService.createAppointment(this.patientId, this.appointmentForm.value).subscribe(
-      success => {
+      () => {
         this.dialogRef.close({event: DialogEvent.CREATE});
       }
     );
   }
 
-  addAppointment() {
+  private addAppointment(): void {
     this.appointmentService.createAppointment(this.appointmentForm.value.patientId, this.appointmentForm.value).subscribe(
-      success => {
+      () => {
         this.dialogRef.close({event: DialogEvent.ADD_APPOINTMENT});
       }
     );
   }
 
-  editAppointmentForSpecificPatient() {
+  private editAppointmentForSpecificPatient(): void {
     this.appointmentForm.addControl('id', new FormControl([this.selectedAppointment.id]));
     this.appointmentService.editAppointmentWithPatient(this.patientId, this.appointmentForm.value).subscribe(
-      success => {
+      () => {
         this.dialogRef.close({event: DialogEvent.EDIT});
       }
     );
   }
 
-  editAppointment() {
+  private editAppointment(): void {
     this.appointmentForm.addControl('id', new FormControl([this.selectedAppointment.id]));
     this.appointmentService.editAppointment(this.appointmentForm.value).subscribe(
-      success => {
+      () => {
         this.dialogRef.close({event: DialogEvent.EDIT_APPOINTMENT});
       }
     );
   }
 
-  closeDialog() {
+  public closeDialog(): void {
     this.dialogRef.close({event: DialogEvent.CLOSE});
   }
 
-  getMedicalProcedures() {
+  private getMedicalProcedures(): void {
     this.medicalProcedureService.getMedicalProcedureList().subscribe(mpList => this.medicalProcedures = mpList);
   }
 
-  getDoctors() {
+  private getDoctors(): void {
     this.doctorService.getDoctorListWithMedicalProcedure(this.appointmentForm.value.medicalProcedureId).subscribe(
       doctors => this.doctors = doctors);
   }
 
-  isAddDialog(): boolean {
+  public isAddDialog(): boolean {
     return this.dialogType === DialogEvent.ADD_APPOINTMENT || this.dialogType === DialogEvent.EDIT_APPOINTMENT;
   }
 }

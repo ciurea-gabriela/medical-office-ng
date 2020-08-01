@@ -7,15 +7,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./home-screen.component.scss']
 })
 export class HomeScreenComponent implements OnInit {
-  private title = 'Medical Office';
+  public title = 'Medical Office';
 
   constructor(private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  goTo(path: string) {
+  public goTo(path: string): void {
     this.router.navigate([path]);
   }
 }

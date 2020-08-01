@@ -13,18 +13,18 @@ import {MedicalProcedureService} from '../../../core/services/medical-procedure.
   styleUrls: ['./medical-procedure-card.component.scss']
 })
 export class MedicalProcedureCardComponent implements OnInit {
-  @Input() medicalProcedure: MedicalProcedure;
-  @Output() refreshList = new EventEmitter();
+  @Input() public medicalProcedure: MedicalProcedure;
+  @Output() public refreshList = new EventEmitter();
 
   constructor(public snackBar: SnackBarUtil,
               private dialog: MatDialog,
               private medicalProcedureService: MedicalProcedureService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  openEditDialog(): void {
+  public openEditDialog(): void {
     const dialogRef = this.dialog.open(CreateEditMpDialogComponent, {
       width: '300px',
       data: {title: 'Edit', type: DialogEvent.EDIT, medicalProcedure: this.medicalProcedure}
@@ -37,7 +37,7 @@ export class MedicalProcedureCardComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(): void {
+  public openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {title: 'Medical Procedure', name: this.medicalProcedure.name}
@@ -45,7 +45,7 @@ export class MedicalProcedureCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.medicalProcedureService.deleteMedicalProcedure(this.medicalProcedure.id.toString()).subscribe(
-          success => this.snackBar.openSnackBar('Medical procedure deleted successfully!', 'close'));
+          () => this.snackBar.openSnackBar('Medical procedure deleted successfully!', 'close'));
         this.refreshList.emit();
       }
     });

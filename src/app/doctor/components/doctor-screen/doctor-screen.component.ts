@@ -11,7 +11,7 @@ import {CreateEditDoctorDialogComponent} from '../create-edit-doctor-dialog/crea
 })
 export class DoctorScreenComponent implements OnInit {
 
-  @ViewChild(DoctorListComponent) doctorListComponent: DoctorListComponent;
+  @ViewChild(DoctorListComponent) private doctorListComponent: DoctorListComponent;
 
   constructor(private dialog: MatDialog) {
   }
@@ -19,7 +19,7 @@ export class DoctorScreenComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(CreateEditDoctorDialogComponent, {
       width: '300px',
       data: {title: 'Create', type: DialogEvent.CREATE}

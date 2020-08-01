@@ -18,24 +18,24 @@ import {UpdateOperation} from '../../../model/enums/update-operation.enum';
   styleUrls: ['./doctor-list.component.scss']
 })
 export class DoctorListComponent implements OnInit {
-  displayedColumns: string[] =
+  public displayedColumns: string[] =
     ['no', 'name', 'cnp', 'sex', 'specialization', 'phoneNumber', 'add', 'edit', 'delete'];
-  dataSource: MatTableDataSource<Doctor>;
-  selectedDoctorId: number;
+  public dataSource: MatTableDataSource<Doctor>;
+  public selectedDoctorId: number;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) public paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) private sort: MatSort;
 
   constructor(private doctorService: DoctorService,
               public snackBar: SnackBarUtil,
               private dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getDoctorList();
   }
 
-  getDoctorList(): void {
+  public getDoctorList(): void {
     this.doctorService.getDoctorList().subscribe(doctors => {
       this.dataSource = new MatTableDataSource<Doctor>(doctors);
       this.dataSource.sort = this.sort;
@@ -43,7 +43,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  openEditDialog(doctor: Doctor): void {
+  public openEditDialog(doctor: Doctor): void {
     const dialogRef = this.dialog.open(CreateEditDoctorDialogComponent, {
       width: '250px',
       data: {title: 'Edit', type: DialogEvent.EDIT, doctor}
@@ -56,7 +56,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(doctor: Doctor): void {
+  public openDeleteDialog(doctor: Doctor): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {title: 'Doctor', name: doctor.name}
@@ -64,7 +64,7 @@ export class DoctorListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.doctorService.deleteDoctor(doctor.id.toString()).subscribe(
-          success => {
+          () => {
             this.snackBar.openSnackBar('Doctor deleted successfully!', 'close');
             this.getDoctorList();
           });
@@ -72,7 +72,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  openAddMpDialog(doctor: Doctor) {
+  public openAddMpDialog(doctor: Doctor): void {
     const dialogRef = this.dialog.open(NewMpDialogComponent, {
       width: '400px',
       data: {title: 'Add', doctor, updateOperationType: UpdateOperation.ADD}
@@ -85,7 +85,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  openDeleteMpDialog(doctor: Doctor) {
+  public openDeleteMpDialog(doctor: Doctor): void {
     const dialogRef = this.dialog.open(NewMpDialogComponent, {
       width: '400px',
       data: {title: 'Remove', doctor, updateOperationType: UpdateOperation.DELETE}
@@ -98,7 +98,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

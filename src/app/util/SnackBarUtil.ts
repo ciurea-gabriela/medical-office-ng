@@ -10,7 +10,7 @@ export class SnackBarUtil {
   private constructor(private snackBar: MatSnackBar) {
   }
 
-  openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 5000,
       panelClass: ['snackbar']

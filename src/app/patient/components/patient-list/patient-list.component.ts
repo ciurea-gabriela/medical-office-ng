@@ -17,13 +17,13 @@ import {SnackBarUtil} from '../../../util/SnackBarUtil';
   styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
-  displayedColumns: string[] =
+  public displayedColumns: string[] =
     ['no', 'firstName', 'lastName', 'birthDate', 'cnp', 'sex', 'city', 'phoneNumber', 'edit', 'delete', 'appointment'];
-  dataSource: MatTableDataSource<Patient>;
-  selectedPatientId: number;
+  public dataSource: MatTableDataSource<Patient>;
+  public selectedPatientId: number;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) public paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) private sort: MatSort;
 
   constructor(
     private patientService: PatientService,
@@ -32,11 +32,11 @@ export class PatientListComponent implements OnInit {
     private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getPatientList();
   }
 
-  getPatientList(): void {
+  public getPatientList(): void {
     this.patientService.getPatientList().subscribe(patients => {
       this.dataSource = new MatTableDataSource<Patient>(patients);
       this.dataSource.sort = this.sort;
@@ -44,7 +44,7 @@ export class PatientListComponent implements OnInit {
     });
   }
 
-  openEditDialog(patient: Patient): void {
+  public openEditDialog(patient: Patient): void {
     const dialogRef = this.dialog.open(CreateEditPatientDialogComponent, {
       width: '250px',
       data: {title: 'Edit', type: DialogEvent.EDIT, patient}
@@ -57,7 +57,7 @@ export class PatientListComponent implements OnInit {
     });
   }
 
-  openDeleteDialog(patient: Patient): void {
+  public openDeleteDialog(patient: Patient): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {title: 'Patient', name: patient.firstName}
@@ -65,21 +65,21 @@ export class PatientListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.patientService.deletePatient(patient.id.toString()).subscribe(
-          success => this.snackBar.openSnackBar('Patient deleted successfully!', 'close'));
+          () => this.snackBar.openSnackBar('Patient deleted successfully!', 'close'));
         this.getPatientList();
       }
     });
   }
 
-  goToAppointments(id: Patient) {
+  public goToAppointments(id: Patient): void {
     this.router.navigate([`patients/${id}/appointments`]);
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  selectRow(patient: Patient) {
+  public selectRow(patient: Patient): void {
     if (patient.id === this.selectedPatientId) {
       this.selectedPatientId = -1;
     } else {

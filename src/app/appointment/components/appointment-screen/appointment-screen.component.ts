@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {AppointmentListComponent} from '../appointment-list/appointment-list.component';
 import {CreateEditAppointmentDialogComponent} from '../create-edit-appointment-dialog/create-edit-appointment-dialog.component';
@@ -14,12 +14,12 @@ import {AppointmentViewType} from '../../../model/enums/appointment-view-type.en
   styleUrls: ['./appointment-screen.component.scss']
 })
 export class AppointmentScreenComponent implements OnInit {
-  patientId: string;
-  selectedPatient: Patient;
-  isDataLoaded = false;
-  appointmentViewTypePatient = AppointmentViewType.PATIENT;
+  public patientId: string;
+  public selectedPatient: Patient;
+  public isDataLoaded = false;
+  public appointmentViewTypePatient = AppointmentViewType.PATIENT;
 
-  @ViewChild(AppointmentListComponent) appointmentListComponent: AppointmentListComponent;
+  @ViewChild(AppointmentListComponent) private appointmentListComponent: AppointmentListComponent;
 
   constructor(
     private dialog: MatDialog,

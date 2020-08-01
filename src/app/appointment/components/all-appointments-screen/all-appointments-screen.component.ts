@@ -11,16 +11,16 @@ import {AppointmentViewType} from '../../../model/enums/appointment-view-type.en
   styleUrls: ['./all-appointments-screen.component.scss']
 })
 export class AllAppointmentsScreenComponent implements OnInit {
-  @ViewChild(AppointmentListComponent) appointmentListComponent: AppointmentListComponent;
-  appointmentViewTypeALL = AppointmentViewType.ALL;
+  @ViewChild(AppointmentListComponent) private appointmentListComponent: AppointmentListComponent;
+  public appointmentViewTypeALL = AppointmentViewType.ALL;
 
   constructor(private dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(CreateEditAppointmentDialogComponent, {
       width: '250px',
       data: {

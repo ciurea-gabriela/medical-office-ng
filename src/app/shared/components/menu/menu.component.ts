@@ -11,10 +11,10 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  goTo(path: string) {
+  public goTo(path: string): void {
     this.router.navigate([path]);
   }
 

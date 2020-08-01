@@ -14,11 +14,11 @@ import {UpdateOperation} from '../../../model/enums/update-operation.enum';
   styleUrls: ['./new-mp-dialog.component.scss']
 })
 export class NewMpDialogComponent implements OnInit {
-  private form: FormGroup;
-  private medicalProcedures: Array<MedicalProcedure> = [];
-  private selectedDoctor: Doctor;
+  public form: FormGroup;
+  public medicalProcedures: Array<MedicalProcedure> = [];
+  public selectedDoctor: Doctor;
   private submitted = false;
-  private title: string;
+  public title: string;
   private readonly updateOperationType: UpdateOperation;
 
   constructor(private dialogRef: MatDialogRef<NewMpDialogComponent>,
@@ -31,7 +31,7 @@ export class NewMpDialogComponent implements OnInit {
     this.title = data.title;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
       medicalProcedureId: ['', Validators.required],
       updateOperation: [this.updateOperationType]
@@ -39,7 +39,7 @@ export class NewMpDialogComponent implements OnInit {
     this.getMedicalProcedures();
   }
 
-  getMedicalProcedures() {
+  private getMedicalProcedures(): void {
     if (this.updateOperationType === UpdateOperation.ADD) {
       this.medicalProcedureService.getMedicalProcedureList().subscribe(
         mpList => this.medicalProcedures = mpList.filter(mp => !this.selectedDoctor.medicalProcedures.includes(mp.name)));
@@ -49,7 +49,7 @@ export class NewMpDialogComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -61,23 +61,23 @@ export class NewMpDialogComponent implements OnInit {
     }
   }
 
-  addMedicalProcedure() {
+  private addMedicalProcedure(): void {
     this.doctorService.updateMedicalProceduresWithinDoctor(this.selectedDoctor.id.toString(), this.form.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.ADD_MEDICAL_PROCEDURE})
+      () => this.dialogRef.close({event: DialogEvent.ADD_MEDICAL_PROCEDURE})
     );
   }
 
-  deleteMedicalProcedure() {
+  private deleteMedicalProcedure(): void {
     this.doctorService.updateMedicalProceduresWithinDoctor(this.selectedDoctor.id.toString(), this.form.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.DELETE_MEDICAL_PROCEDURE})
+      () => this.dialogRef.close({event: DialogEvent.DELETE_MEDICAL_PROCEDURE})
     );
   }
 
-  closeDialog(): void {
+  public closeDialog(): void {
     this.dialogRef.close({event: DialogEvent.CLOSE});
   }
 
-  isAddOperationType() {
+  public isAddOperationType(): boolean {
     return this.updateOperationType === UpdateOperation.ADD;
   }
 

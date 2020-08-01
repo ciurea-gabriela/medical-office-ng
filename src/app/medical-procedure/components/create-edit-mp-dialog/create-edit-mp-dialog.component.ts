@@ -11,9 +11,8 @@ import {MedicalProcedureService} from '../../../core/services/medical-procedure.
   styleUrls: ['./create-edit-mp-dialog.component.scss']
 })
 export class CreateEditMpDialogComponent implements OnInit {
-
-  private medicalProcedureForm: FormGroup;
-  private title: string;
+  public medicalProcedureForm: FormGroup;
+  public title: string;
   readonly dialogType: DialogEvent;
   private selectedMedicalProcedure?: MedicalProcedure;
   private emptyMedicalProcedure: MedicalProcedure = {
@@ -42,7 +41,7 @@ export class CreateEditMpDialogComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.medicalProcedureForm.invalid) {
       return;
@@ -54,20 +53,20 @@ export class CreateEditMpDialogComponent implements OnInit {
     }
   }
 
-  closeDialog(): void {
+  public closeDialog(): void {
     this.dialogRef.close({event: DialogEvent.CLOSE});
   }
 
   private createMedicalProcedure(): void {
     this.medicalProcedureService.createMedicalProcedure(this.medicalProcedureForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.CREATE})
+      () => this.dialogRef.close({event: DialogEvent.CREATE})
     );
   }
 
   private editMedicalProcedure(): void {
     this.medicalProcedureForm.addControl('id', new FormControl([this.selectedMedicalProcedure.id]));
     this.medicalProcedureService.editMedicalProcedure(this.medicalProcedureForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.EDIT})
+      () => this.dialogRef.close({event: DialogEvent.EDIT})
     );
   }
 }

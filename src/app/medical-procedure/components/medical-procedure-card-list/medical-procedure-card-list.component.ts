@@ -7,16 +7,16 @@ import {MedicalProcedureService} from '../../../core/services/medical-procedure.
   styleUrls: ['./medical-procedure-card-list.component.scss']
 })
 export class MedicalProcedureCardListComponent implements OnInit {
-  medicalProcedureList = [];
+  public medicalProcedureList = [];
 
   constructor(private medicalProcedureService: MedicalProcedureService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getMedicalProcedureList();
   }
 
-  getMedicalProcedureList() {
+  public getMedicalProcedureList(): void {
     this.medicalProcedureService.getMedicalProcedureList().subscribe(
       list => this.medicalProcedureList = list
     );

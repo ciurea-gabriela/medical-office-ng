@@ -15,8 +15,8 @@ import {MedicalProcedure} from '../../../model/medical-procedure.interface';
   styleUrls: ['./create-edit-doctor-dialog.component.scss']
 })
 export class CreateEditDoctorDialogComponent implements OnInit {
-  private doctorForm: FormGroup;
-  private title: string;
+  public doctorForm: FormGroup;
+  public title: string;
   readonly dialogType: DialogEvent;
   private selectedDoctor?: Doctor;
   private emptyDoctor: Doctor = {
@@ -27,7 +27,7 @@ export class CreateEditDoctorDialogComponent implements OnInit {
     phoneNumber: ''
   };
   private submitted = false;
-  private medicalProcedures: Array<MedicalProcedure> = [];
+  public medicalProcedures: Array<MedicalProcedure> = [];
 
   constructor(private dialogRef: MatDialogRef<CreateEditDoctorDialogComponent>,
               private formBuilder: FormBuilder,
@@ -40,7 +40,7 @@ export class CreateEditDoctorDialogComponent implements OnInit {
     this.selectedDoctor = data.doctor || this.emptyDoctor;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.doctorForm = this.formBuilder.group({
       name: [this.selectedDoctor.name, Validators.required],
       cnp: [this.selectedDoctor.cnp,
@@ -55,7 +55,7 @@ export class CreateEditDoctorDialogComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.dialogType === DialogEvent.EDIT) {
       this.doctorForm.removeControl('medicalProcedureId');
     }
@@ -72,7 +72,7 @@ export class CreateEditDoctorDialogComponent implements OnInit {
 
   private createDoctor(): void {
     this.doctorService.createDoctor(this.doctorForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.CREATE}),
+      () => this.dialogRef.close({event: DialogEvent.CREATE}),
       (err: HttpErrorResponse) => {
         if (err.status === 400) {
           this.snackBar.openSnackBar('Cnp already in use.', 'close');
@@ -84,7 +84,7 @@ export class CreateEditDoctorDialogComponent implements OnInit {
   private editDoctor(): void {
     this.doctorForm.addControl('id', new FormControl([this.selectedDoctor.id]));
     this.doctorService.editDoctor(this.doctorForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.EDIT}),
+      () => this.dialogRef.close({event: DialogEvent.EDIT}),
       (err: HttpErrorResponse) => {
         if (err.status === 403) {
           this.snackBar.openSnackBar('Cnp already in use.', 'close');
@@ -93,15 +93,15 @@ export class CreateEditDoctorDialogComponent implements OnInit {
     );
   }
 
-  closeDialog(): void {
+  public closeDialog(): void {
     this.dialogRef.close({event: DialogEvent.CLOSE});
   }
 
-  isCreateDialog(): boolean {
+  public isCreateDialog(): boolean {
     return this.dialogType === DialogEvent.CREATE;
   }
 
-  getMedicalProcedures() {
+  private getMedicalProcedures() {
     this.medicalProcedureService.getMedicalProcedureList().subscribe(mpList => this.medicalProcedures = mpList);
   }
 }

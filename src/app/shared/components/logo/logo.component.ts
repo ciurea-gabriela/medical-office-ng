@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Patient} from '../../../model/patient.interface';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-logo',
@@ -8,7 +6,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./logo.component.scss']
 })
 export class LogoComponent implements OnInit {
-  @Input() private title: string;
+  @Input() public title: string;
 
   constructor() {
   }

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Appointment} from 'src/app/model/appointment.interface';
 import {AppointmentService} from '../../../core/services/appointment.service';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {DeleteDialogComponent} from '../../../shared/components/delete-dialog/delete-dialog.component';
 import {SnackBarUtil} from '../../../util/SnackBarUtil';
@@ -18,13 +18,13 @@ import {AppointmentViewType} from '../../../model/enums/appointment-view-type.en
   styleUrls: ['./appointment-list.component.scss']
 })
 export class AppointmentListComponent implements OnInit {
-  private displayedColumns: string[];
+  public displayedColumns: string[];
   @Input() patientId: string;
   @Input() appointmentViewType: AppointmentViewType;
-  private selectedAppointmentId: number;
-  private isPatientPresent: boolean;
+  public selectedAppointmentId: number;
+  public isPatientPresent: boolean;
   private selectedAppointment: Appointment;
-  private dataSource: MatTableDataSource<Appointment>;
+  public dataSource: MatTableDataSource<Appointment>;
   private dialogType: DialogEvent;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -36,7 +36,7 @@ export class AppointmentListComponent implements OnInit {
     public snackBar: SnackBarUtil) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getDialogType();
     if (isNotNullOrUndefined(this.patientId)) {
       this.getAppointmentList(this.patientId);
@@ -47,7 +47,7 @@ export class AppointmentListComponent implements OnInit {
     this.getDisplayedColumns();
   }
 
-  getDisplayedColumns() {
+  private getDisplayedColumns(): void {
     if (this.isPatientPresent) {
       this.displayedColumns = ['no', 'status', 'startTime', 'endTime', 'description', 'doctor', 'medicalProcedure', 'edit', 'delete'];
     } else {
@@ -56,7 +56,7 @@ export class AppointmentListComponent implements OnInit {
     }
   }
 
-  getAllAppointmentList() {
+  public getAllAppointmentList() {
     this.appointmentService.getAllAppointmentList().subscribe(appointments => {
       this.dataSource = new MatTableDataSource<Appointment>(appointments);
       this.dataSource.sort = this.sort;
@@ -64,7 +64,7 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
-  getAppointmentList(patientId: string): void {
+  public getAppointmentList(patientId: string): void {
     this.appointmentService.getAppointmentList(patientId).subscribe(appointments => {
       this.dataSource = new MatTableDataSource<Appointment>(appointments);
       this.dataSource.sort = this.sort;
@@ -72,7 +72,7 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
-  openEditDialog(appointment: Appointment): void {
+  public openEditDialog(appointment: Appointment): void {
     const dialogRef = this.dialog.open(CreateEditAppointmentDialogComponent, {
       width: '250px',
       data: {patientId: this.patientId || appointment.patientId, title: 'Edit', type: this.dialogType, appointment}
@@ -96,7 +96,7 @@ export class AppointmentListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.appointmentService.deleteAppointment(appointment.patientId, appointment.id.toString()).subscribe(
-          success => {
+          () => {
             if (this.appointmentViewType === AppointmentViewType.PATIENT) {
               this.snackBar.openSnackBar('Appointment deleted successfully!', 'close');
               this.getAppointmentList(this.patientId);
@@ -125,7 +125,7 @@ export class AppointmentListComponent implements OnInit {
   getDialogType() {
     if (this.appointmentViewType === AppointmentViewType.ALL) {
       this.dialogType = DialogEvent.EDIT_APPOINTMENT;
-    } else if (this.appointmentViewType === AppointmentViewType.PATIENT){
+    } else if (this.appointmentViewType === AppointmentViewType.PATIENT) {
       this.dialogType = DialogEvent.EDIT;
     }
   }

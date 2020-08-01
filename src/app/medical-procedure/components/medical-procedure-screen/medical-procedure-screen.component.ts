@@ -11,16 +11,16 @@ import {SnackBarUtil} from '../../../util/SnackBarUtil';
   styleUrls: ['./medical-procedure-screen.component.scss']
 })
 export class MedicalProcedureScreenComponent implements OnInit {
-  @ViewChild(MedicalProcedureCardListComponent) medicalProcedureCardListComponent: MedicalProcedureCardListComponent;
+  @ViewChild(MedicalProcedureCardListComponent) private medicalProcedureCardListComponent: MedicalProcedureCardListComponent;
 
   constructor(private dialog: MatDialog,
               private snackBar: SnackBarUtil) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  openCreateMedicalProcedureDialog() {
+  public openCreateMedicalProcedureDialog(): void {
     const dialogRef = this.dialog.open(CreateEditMpDialogComponent, {
       width: '300px',
       data: {title: 'Create', type: DialogEvent.CREATE}

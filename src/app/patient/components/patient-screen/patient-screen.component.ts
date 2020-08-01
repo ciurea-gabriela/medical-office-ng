@@ -11,15 +11,15 @@ import {CreateEditPatientDialogComponent} from '../create-edit-patient-dialog/cr
 })
 export class PatientScreenComponent implements OnInit {
 
-  @ViewChild(PatientListComponent) patientListComponent: PatientListComponent;
+  @ViewChild(PatientListComponent) private patientListComponent: PatientListComponent;
 
   constructor(private dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(CreateEditPatientDialogComponent, {
       width: '250px',
       data: {title: 'Create', type: DialogEvent.CREATE}

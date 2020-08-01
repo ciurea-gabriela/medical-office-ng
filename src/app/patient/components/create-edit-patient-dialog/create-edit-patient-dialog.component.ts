@@ -13,9 +13,8 @@ import {SnackBarUtil} from '../../../util/SnackBarUtil';
   styleUrls: ['./create-edit-patient-dialog.component.scss']
 })
 export class CreateEditPatientDialogComponent implements OnInit {
-
-  private patientForm: FormGroup;
-  private title: string;
+  public patientForm: FormGroup;
+  public title: string;
   readonly dialogType: DialogEvent;
   private selectedPatient?: Patient;
   private emptyPatient: Patient = {
@@ -28,8 +27,8 @@ export class CreateEditPatientDialogComponent implements OnInit {
     phoneNumber: ''
   };
   private submitted = false;
-  private minDate: Date = new Date(1910, 0, 1);
-  private maxDate: Date = new Date();
+  public minDate: Date = new Date(1910, 0, 1);
+  public maxDate: Date = new Date();
 
   constructor(
     private dialogRef: MatDialogRef<CreateEditPatientDialogComponent>,
@@ -56,7 +55,7 @@ export class CreateEditPatientDialogComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.patientForm.invalid) {
       return;
@@ -68,13 +67,13 @@ export class CreateEditPatientDialogComponent implements OnInit {
     }
   }
 
-  closeDialog(): void {
+  public closeDialog(): void {
     this.dialogRef.close({event: DialogEvent.CLOSE});
   }
 
   private createPatient(): void {
     this.patientService.createPatient(this.patientForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.CREATE}),
+      () => this.dialogRef.close({event: DialogEvent.CREATE}),
       (err: HttpErrorResponse) => {
         if (err.status === 400) {
           this.snackBar.openSnackBar('Cnp already in use.', 'close');
@@ -86,7 +85,7 @@ export class CreateEditPatientDialogComponent implements OnInit {
   private editPatient(): void {
     this.patientForm.addControl('id', new FormControl([this.selectedPatient.id]));
     this.patientService.editPatient(this.patientForm.value).subscribe(
-      success => this.dialogRef.close({event: DialogEvent.EDIT}),
+      () => this.dialogRef.close({event: DialogEvent.EDIT}),
       (err: HttpErrorResponse) => {
         if (err.status === 403) {
           this.snackBar.openSnackBar('Cnp already in use.', 'close');
