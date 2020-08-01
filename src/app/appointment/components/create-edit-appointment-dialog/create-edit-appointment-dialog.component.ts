@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {AppointmentService} from '../../../core/services/appointment.service';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {MedicalProcedureService} from '../../../core/services/medical-procedure.service';

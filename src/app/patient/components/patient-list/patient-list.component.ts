@@ -1,7 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Patient} from 'src/app/model/patient.interface';
 import {PatientService} from 'src/app/core/services/patient.service';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {Router} from '@angular/router';
 import {DeleteDialogComponent} from '../../../shared/components/delete-dialog/delete-dialog.component';

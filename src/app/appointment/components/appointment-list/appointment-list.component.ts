@@ -1,7 +1,10 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Appointment} from 'src/app/model/appointment.interface';
 import {AppointmentService} from '../../../core/services/appointment.service';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {DeleteDialogComponent} from '../../../shared/components/delete-dialog/delete-dialog.component';
 import {SnackBarUtil} from '../../../util/SnackBarUtil';

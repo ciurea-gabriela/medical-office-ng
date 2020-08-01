@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {PatientListComponent} from '../patient-list/patient-list.component';
 import {DialogEvent} from 'src/app/model/enums/dialog-event.enum';
 import {CreateEditPatientDialogComponent} from '../create-edit-patient-dialog/create-edit-patient-dialog.component';
