@@ -1,0 +1,6 @@
+<div>
+  <app-medical-procedure-card *ngFor="let medicalProcedure of medicalProcedureList"
+    (refreshList)="getMedicalProcedureList()"
+    [medicalProcedure]="medicalProcedure">
+  </app-medical-procedure-card>
+</div>

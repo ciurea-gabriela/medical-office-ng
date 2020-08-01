@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{title}} Doctor</h2>
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="cnp" minlength="13" maxlength="13" placeholder="CNP">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="sex" placeholder="Select Gender">
+        <mat-option value='MALE'>Male</mat-option>
+        <mat-option value='FEMALE'>Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="specialization" placeholder="Specialization">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="tel" minlength="10" maxlength="12" matInput formControlName="phoneNumber" placeholder="Phone Number">
+    </mat-form-field>
+    <mat-form-field *ngIf="isCreateDialog()">
+      <mat-select formControlName="medicalProcedureId" placeholder="Medical Procedure">
+        <mat-option *ngFor="let mp of medicalProcedures" [value]="mp.id">
+          {{mp.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button type="submit" mat-button cdkFocusInitial>{{title}}</button>
+    <button mat-button mat-dialog-close (click)="closeDialog()">Cancel</button>
+  </mat-dialog-actions>
+</form>

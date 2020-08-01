@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{title}} Medical Procedure</h2>
+<form [formGroup]="medicalProcedureForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="price" placeholder="Price">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput
+                formControlName="description"
+                placeholder="Description"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5">
+      </textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button type="submit" mat-button cdkFocusInitial>{{title}}</button>
+    <button mat-button mat-dialog-close (click)="closeDialog()">Cancel</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,16 @@
+<app-menu></app-menu>
+<app-logo [title]="'Appointments'"></app-logo>
+<ul class="patient" *ngIf="isDataLoaded">
+    <li>{{selectedPatient.firstName}}</li>
+    <li>{{selectedPatient.lastName}}</li>
+    <li>{{selectedPatient.birthDate | date:'mediumDate'}}</li>
+    <li>{{selectedPatient.cnp}}</li>
+    <li>{{selectedPatient.sex.toString() | titlecase}}</li>
+    <li>{{selectedPatient.city}}</li>
+    <li>{{selectedPatient.phoneNumber}}</li>
+</ul>
+<app-appointment-list [patientId]="patientId" [appointmentViewType]="appointmentViewTypePatient"></app-appointment-list>
+<div class="btn-bar">
+    <button class="button" mat-raised-button color="accent" [routerLink]="['/patients']">Back</button>
+    <button class="button" mat-raised-button color="accent" (click)="openDialog()">Create Appointment</button>
+</div>

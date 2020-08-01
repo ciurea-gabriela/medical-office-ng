@@ -1,0 +1,10 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon  class="material-icons">menu</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="goTo('home')">Home</button>
+  <button mat-menu-item (click)="goTo('patients')">Patients</button>
+  <button mat-menu-item (click)="goTo('doctors')">Doctors</button>
+  <button mat-menu-item (click)="goTo('medical-procedures')">Medical Procedures</button>
+  <button mat-menu-item (click)="goTo('appointments')">Appointments</button>
+</mat-menu>

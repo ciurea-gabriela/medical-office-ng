@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+}
+
+mat-icon:hover {
+  cursor: pointer;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  border-right: ridge;
+}
+
+.mat-elevation-z {
+  border-color: black;
+}
+
+.mat-elevation-z8 {
+  width: 90%;
+  margin: 0 auto;
+}
+
+th.mat-header-cell {
+  font-size: 16px;
+  text-align: center !important;
+}
+
+td.mat-cell {
+  text-align: center !important;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}
+
+.icon {
+  width: 50px;
+}
+
+.filter {
+  width: 90%;
+  margin: 0 auto;
+
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.selected {
+  background-color: rgba(230, 227, 227, 0.76);
+}

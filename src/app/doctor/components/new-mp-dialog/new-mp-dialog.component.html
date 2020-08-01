@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{title | titlecase}} Medical Procedure</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <p *ngIf="isAddOperationType()">Available procedures: </p>
+    <ul *ngIf="isAddOperationType()">
+      <li *ngFor="let mp of selectedDoctor.medicalProcedures">
+        {{mp }}
+      </li>
+    </ul>
+    <mat-form-field>
+      <mat-select formControlName="medicalProcedureId" placeholder="Medical Procedure">
+        <mat-option *ngFor="let mp of medicalProcedures" [value]="mp.id">
+          {{mp.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button type="submit" mat-button cdkFocusInitial>{{title | titlecase}}</button>
+    <button mat-button mat-dialog-close (click)="closeDialog()">Cancel</button>
+  </mat-dialog-actions>
+</form>
