@@ -1,16 +1,14 @@
-//Install express server
 const express = require('express');
-const path = require('path');
 
 const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/medical-office-ng'));
+app.use(express.static('./medical-office-ng'));
 
-app.get('/*', function(req,res) {
-
-  res.sendFile(path.join(__dirname+'/dist/medical-office-ng/index.html'));
+app.get('/*', function (req, res) {
+  res.sendFile('index.html', { root: 'medical-office-ng' }
+  );
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 8080);
+
+console.log(`Running on port ${process.env.PORT || 8080}`)
