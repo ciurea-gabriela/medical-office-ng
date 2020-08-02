@@ -2,10 +2,10 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.static('./medical-office-ng'));
+app.use(express.static('./dist/medical-office-ng'));
 
 app.get('/*', function (req, res) {
-  res.sendFile('index.html', { root: 'medical-office-ng' }
+  res.sendFile('index.html', { root: 'dist/medical-office-ng' }
   );
 });
 
