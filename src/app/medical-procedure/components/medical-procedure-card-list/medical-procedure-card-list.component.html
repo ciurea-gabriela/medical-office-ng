@@ -1,6 +1,6 @@
 <div>
   <app-medical-procedure-card *ngFor="let medicalProcedure of medicalProcedureList"
-    (refreshList)="getMedicalProcedureList()"
+    (refreshList)="refreshList($event)"
     [medicalProcedure]="medicalProcedure">
   </app-medical-procedure-card>
 </div>

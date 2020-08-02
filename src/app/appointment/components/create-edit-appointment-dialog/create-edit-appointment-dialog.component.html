@@ -9,10 +9,16 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="startTime" type="datetime-local" placeholder="Enter a start time">
+      <input matInput [ngxMatDatetimePicker]="startTime" formControlName="startTime" placeholder="Enter a start time"
+             [min]="minDate" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="startTime"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #startTime [touchUi]="true" [color] = color [defaultTime]="defaultTime" [enableMeridian]="true"></ngx-mat-datetime-picker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="endTime" type="datetime-local" placeholder="Enter an end time">
+      <input matInput [ngxMatDatetimePicker]="endTime" formControlName="endTime" placeholder="Enter an end time"
+             [min]="minDate" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="endTime"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #endTime [touchUi]="true" [color]="color" [defaultTime]="defaultTime" [enableMeridian]="true"></ngx-mat-datetime-picker>
     </mat-form-field>
     <mat-form-field>
       <input matInput formControlName="description" placeholder="Description">

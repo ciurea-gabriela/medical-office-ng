@@ -78,10 +78,10 @@ export class AppointmentListComponent implements OnInit {
       data: {patientId: this.patientId || appointment.patientId, title: 'Edit', type: this.dialogType, appointment}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.EDIT) {
+      if (result?.event === DialogEvent.EDIT) {
         this.snackBar.openSnackBar('Appointment updated successfully!', 'close');
         this.getAppointmentList(this.patientId);
-      } else if (result.event === DialogEvent.EDIT_APPOINTMENT) {
+      } else if (result?.event === DialogEvent.EDIT_APPOINTMENT) {
         this.snackBar.openSnackBar('Appointment updated successfully!', 'close');
         this.getAllAppointmentList();
       }

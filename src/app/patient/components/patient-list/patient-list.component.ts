@@ -50,7 +50,7 @@ export class PatientListComponent implements OnInit {
       data: {title: 'Edit', type: DialogEvent.EDIT, patient}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.EDIT) {
+      if (result?.event === DialogEvent.EDIT) {
         this.snackBar.openSnackBar('Patient updated successfully!', 'close');
         this.getPatientList();
       }

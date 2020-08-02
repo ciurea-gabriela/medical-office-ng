@@ -14,7 +14,7 @@ import {MedicalProcedureService} from '../../../core/services/medical-procedure.
 })
 export class MedicalProcedureCardComponent implements OnInit {
   @Input() public medicalProcedure: MedicalProcedure;
-  @Output() public refreshList = new EventEmitter();
+  @Output() public refreshList: EventEmitter<boolean> = new EventEmitter();
 
   constructor(public snackBar: SnackBarUtil,
               private dialog: MatDialog,
@@ -30,9 +30,9 @@ export class MedicalProcedureCardComponent implements OnInit {
       data: {title: 'Edit', type: DialogEvent.EDIT, medicalProcedure: this.medicalProcedure}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.EDIT) {
+      if (result?.event === DialogEvent.EDIT) {
         this.snackBar.openSnackBar('Medical Procedure updated successfully!', 'close');
-        this.refreshList.emit();
+        this.refreshList.emit(true);
       }
     });
   }
@@ -45,8 +45,11 @@ export class MedicalProcedureCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.medicalProcedureService.deleteMedicalProcedure(this.medicalProcedure.id.toString()).subscribe(
-          () => this.snackBar.openSnackBar('Medical procedure deleted successfully!', 'close'));
-        this.refreshList.emit();
+          () => {
+            this.snackBar.openSnackBar('Medical procedure deleted successfully!', 'close');
+            this.refreshList.emit(true);
+          }
+        );
       }
     });
   }

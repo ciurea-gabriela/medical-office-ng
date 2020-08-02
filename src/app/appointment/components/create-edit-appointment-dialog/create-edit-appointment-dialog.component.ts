@@ -11,6 +11,7 @@ import {Doctor} from '../../../model/doctor.interface';
 import {PatientService} from '../../../core/services/patient.service';
 import {Patient} from '../../../model/patient.interface';
 import {MedicalProcedure} from '../../../model/medical-procedure.interface';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-create-appointment-dialog',
@@ -20,7 +21,7 @@ import {MedicalProcedure} from '../../../model/medical-procedure.interface';
 export class CreateEditAppointmentDialogComponent implements OnInit {
   public appointmentForm: FormGroup;
   private submitted = false;
-  private patientId: string;
+  public patientId: string;
   public title: string;
   readonly dialogType: DialogEvent;
   private selectedAppointment: Appointment;
@@ -33,9 +34,12 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
     endTime: null,
     description: '-',
     medicalProcedureId: '',
-    doctorId: '',
-    patientId: ''
+    doctorId: ''
   };
+  public minDate: Date = new Date();
+  public maxDate?: Date = new Date();
+  public defaultTime = [9, 0, 0];
+  public color: ThemePalette = 'primary';
 
   constructor(
     private dialogRef: MatDialogRef<CreateEditAppointmentDialogComponent>,
@@ -60,7 +64,7 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
       description: [this.selectedAppointment.description],
       medicalProcedureId: [this.selectedAppointment.medicalProcedureId, Validators.required],
       doctorId: [{value: this.selectedAppointment.doctorId, disabled: true}, Validators.required],
-      patientId: [this.selectedAppointment.patientId, Validators.required]
+      patientId: [this.patientId || this.selectedAppointment.patientId, Validators.required]
     });
     if (this.dialogType === DialogEvent.EDIT) {
       this.enableDoctor();
@@ -74,6 +78,8 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
     }
     this.getMedicalProcedures();
     this.onChanges();
+    this.minDate.setDate(this.minDate.getDate() - 1);
+    this.maxDate.setDate(this.minDate.getDate() + 30);
   }
 
   private enableDoctor(): void {
@@ -95,6 +101,7 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
 
   public onSubmit(): void {
     this.submitted = true;
+    console.log(this.appointmentForm);
     if (this.appointmentForm.invalid) {
       return;
     }
@@ -162,8 +169,8 @@ export class CreateEditAppointmentDialogComponent implements OnInit {
 }
 
 interface DialogData {
-  patientId: string;
-  title: string;
-  type: DialogEvent;
+  patientId?: string;
+  title?: string;
+  type?: DialogEvent;
   appointment?: Appointment;
 }

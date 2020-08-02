@@ -49,7 +49,7 @@ export class DoctorListComponent implements OnInit {
       data: {title: 'Edit', type: DialogEvent.EDIT, doctor}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.EDIT) {
+      if (result?.event === DialogEvent.EDIT) {
         this.snackBar.openSnackBar('Doctor updated successfully!', 'close');
         this.getDoctorList();
       }
@@ -78,7 +78,7 @@ export class DoctorListComponent implements OnInit {
       data: {title: 'Add', doctor, updateOperationType: UpdateOperation.ADD}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.ADD_MEDICAL_PROCEDURE) {
+      if (result?.event === DialogEvent.ADD_MEDICAL_PROCEDURE) {
         this.snackBar.openSnackBar('Medical Procedure added successfully!', 'close');
         this.getDoctorList();
       }
@@ -91,7 +91,7 @@ export class DoctorListComponent implements OnInit {
       data: {title: 'Remove', doctor, updateOperationType: UpdateOperation.DELETE}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.DELETE_MEDICAL_PROCEDURE) {
+      if (result?.event === DialogEvent.DELETE_MEDICAL_PROCEDURE) {
         this.snackBar.openSnackBar('Medical Procedure removed successfully!', 'close');
         this.getDoctorList();
       }

@@ -29,7 +29,7 @@ export class AllAppointmentsScreenComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.ADD_APPOINTMENT) {
+      if (result?.event === DialogEvent.ADD_APPOINTMENT) {
         this.appointmentListComponent.snackBar.openSnackBar('Appointment created successfully!', 'close');
         this.appointmentListComponent.getAllAppointmentList();
       }

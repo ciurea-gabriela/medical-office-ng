@@ -9,10 +9,7 @@ import {DoctorModule} from './doctor/doctor.module';
 import {AppointmentModule} from './appointment/appointment.module';
 import {HomeModule} from './home/home.module';
 import {PatientModule} from './patient/patient.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {RequestFilter} from './security/request-filter';
-import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
-
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,17 +26,7 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material
     HomeModule,
     HttpClientModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestFilter,
-      multi: true
-    },
-    {
-      provide: ErrorStateMatcher,
-      useClass: ShowOnDirtyErrorStateMatcher
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {

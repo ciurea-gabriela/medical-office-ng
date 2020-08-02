@@ -25,7 +25,7 @@ export class PatientScreenComponent implements OnInit {
       data: {title: 'Create', type: DialogEvent.CREATE}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.CREATE) {
+      if (result?.event === DialogEvent.CREATE) {
         this.patientListComponent.snackBar.openSnackBar('Patient created successfully!', 'close');
         this.patientListComponent.getPatientList();
       }

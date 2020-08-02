@@ -12,7 +12,7 @@ import {CreateEditAppointmentDialogComponent} from './components/create-edit-app
 import {SharedModule} from '../shared/shared.module';
 import {DeleteDialogComponent} from '../shared/components/delete-dialog/delete-dialog.component';
 import {AllAppointmentsScreenComponent} from './components/all-appointments-screen/all-appointments-screen.component';
-
+import {NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,10 @@ import {AllAppointmentsScreenComponent} from './components/all-appointments-scre
     MaterialModule,
     CoreModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   entryComponents: [
     CreateEditAppointmentDialogComponent,

@@ -26,7 +26,7 @@ export class MedicalProcedureScreenComponent implements OnInit {
       data: {title: 'Create', type: DialogEvent.CREATE}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.CREATE) {
+      if (result?.event === DialogEvent.CREATE) {
         this.snackBar.openSnackBar('Medical Procedure created successfully', 'close');
         this.medicalProcedureCardListComponent.getMedicalProcedureList();
       }

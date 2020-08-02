@@ -43,7 +43,7 @@ export class AppointmentScreenComponent implements OnInit {
       data: {patientId: this.patientId, title: 'Create', type: DialogEvent.CREATE}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === DialogEvent.CREATE) {
+      if (result?.event === DialogEvent.CREATE) {
         this.appointmentListComponent.snackBar.openSnackBar('Appointment created successfully!', 'close');
         this.appointmentListComponent.getAppointmentList(this.patientId);
       }

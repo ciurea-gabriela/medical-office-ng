@@ -22,4 +22,10 @@ export class MedicalProcedureCardListComponent implements OnInit {
     );
   }
 
+  public refreshList(event: boolean): void {
+    if (event) {
+      this.getMedicalProcedureList();
+    }
+  }
+
 }
