@@ -9,6 +9,9 @@ import {DoctorModule} from './doctor/doctor.module';
 import {AppointmentModule} from './appointment/appointment.module';
 import {HomeModule} from './home/home.module';
 import {PatientModule} from './patient/patient.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {RequestFilter} from './security/request-filter';
+import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 
 
 @NgModule({
@@ -23,9 +26,20 @@ import {PatientModule} from './patient/patient.module';
     AppointmentModule,
     MedicalProcedureModule,
     DoctorModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestFilter,
+      multi: true
+    },
+    {
+      provide: ErrorStateMatcher,
+      useClass: ShowOnDirtyErrorStateMatcher
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

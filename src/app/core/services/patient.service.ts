@@ -8,30 +8,30 @@ import {Patient} from '../../model/patient.interface';
 })
 export class PatientService {
 
-  private localHost = 'https://medical-office-app.herokuapp.com/patients';
+  private patientsUri = 'https://medical-office-app.herokuapp.com/patients';
 
   constructor(private http: HttpClient) {
   }
 
   getPatient(id: string): Observable<Patient> {
-    return this.http.get<Patient>(this.localHost + `/${id}`);
+    return this.http.get<Patient>(this.patientsUri + `/${id}`);
   }
 
   getPatientList(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(this.localHost);
+    return this.http.get<Patient[]>(this.patientsUri);
   }
 
   createPatient(patient: Patient): Observable<Patient> {
-    return this.http.post<Patient>(this.localHost, patient);
+    return this.http.post<Patient>(this.patientsUri, patient);
   }
 
   editPatient(patient: Patient): Observable<{}> {
-    return this.http.put(this.localHost + `/${patient.id}`, patient);
+    return this.http.put(this.patientsUri + `/${patient.id}`, patient);
 
   }
 
   deletePatient(id: string): Observable<{}> {
-    return this.http.delete(this.localHost + `/${id}`);
+    return this.http.delete(this.patientsUri + `/${id}`);
   }
 
 }

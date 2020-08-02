@@ -8,29 +8,29 @@ import {MedicalProcedure} from '../../model/medical-procedure.interface';
 })
 export class MedicalProcedureService {
 
-  private localHost = 'https://medical-office-app.herokuapp.com/medical-procedures';
+  private medicalProceduresUri = 'https://medical-office-app.herokuapp.com/medical-procedures';
 
   constructor(private http: HttpClient) {
   }
 
   getMedicalProcedure(id: string): Observable<MedicalProcedure> {
-    return this.http.get<MedicalProcedure>(this.localHost + `/${id}`);
+    return this.http.get<MedicalProcedure>(this.medicalProceduresUri + `/${id}`);
   }
 
   getMedicalProcedureList(): Observable<MedicalProcedure[]> {
-    return this.http.get<MedicalProcedure[]>(this.localHost);
+    return this.http.get<MedicalProcedure[]>(this.medicalProceduresUri);
   }
 
   createMedicalProcedure(medicalProcedure: MedicalProcedure): Observable<MedicalProcedure> {
-    return this.http.post<MedicalProcedure>(this.localHost, medicalProcedure);
+    return this.http.post<MedicalProcedure>(this.medicalProceduresUri, medicalProcedure);
   }
 
   editMedicalProcedure(medicalProcedure: MedicalProcedure): Observable<{}> {
-    return this.http.put(this.localHost + `/${medicalProcedure.id}`, medicalProcedure);
+    return this.http.put(this.medicalProceduresUri + `/${medicalProcedure.id}`, medicalProcedure);
 
   }
 
   deleteMedicalProcedure(id: string): Observable<{}> {
-    return this.http.delete(this.localHost + `/${id}`);
+    return this.http.delete(this.medicalProceduresUri + `/${id}`);
   }
 }
