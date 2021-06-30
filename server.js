@@ -3,7 +3,9 @@ const cors = require('cors');
 
 const app = express();
 
-const whitelist = ['https://medical-office-app.herokuapp.com']; // list of allow domain
+const whitelist = ['https://medical-office-app.herokuapp.com',
+  'https://fonts.googleapis.com/css?family=Open+Sans:300,300i&display=swap'
+]; // list of allow domain
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -12,6 +14,7 @@ const corsOptions = {
     }
 
     if (whitelist.indexOf(origin) === -1) {
+      console.log("origin: " + origin)
       const msg = 'The CORS policy for this site does not ' +
         'allow access from the specified Origin.';
       return callback(new Error(msg), false);
